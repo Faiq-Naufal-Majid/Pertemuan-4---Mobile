@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'providers/user_provider.dart';
 import 'screens/home_screen.dart';
 
@@ -11,15 +12,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UserProviderWrapper(
-      child: MaterialApp(
-        title: 'State & Preferences',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const HomeScreen(),
+    // Latihan 4: Menggunakan ChangeNotifierProvider dan Consumer
+    return ChangeNotifierProvider(
+      create: (_) => UserProvider(),
+      child: Consumer<UserProvider>(
+        builder: (context, provider, child) {
+          return MaterialApp(
+            title: 'State & Preferences',
+            debugShowCheckedModeBanner: false,
+            themeMode: provider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.light,
+              ),
+              useMaterial3: true,
+            ),
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.dark,
+              ),
+              useMaterial3: true,
+            ),
+            home: const HomeScreen(),
+          );
+        },
       ),
     );
   }
