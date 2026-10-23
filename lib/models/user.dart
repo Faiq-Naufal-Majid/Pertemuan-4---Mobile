@@ -9,7 +9,7 @@ class User {
     this.isLoggedIn = false,
   });
 
-  // Konversi ke Map untuk disimpan
+ 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -18,7 +18,7 @@ class User {
     };
   }
 
-  // Buat User dari Map
+
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       name: map['name'] ?? '',
@@ -27,7 +27,7 @@ class User {
     );
   }
 
-  // Copy with untuk update sebagian
+  
   User copyWith({
     String? name,
     String? email,
